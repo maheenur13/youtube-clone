@@ -25,6 +25,9 @@ const LoginScreen = () => {
     newUserInfo.name=user.displayName;
     newUserInfo.email=user.email;
     newUserInfo.photo=user.photoURL;
+    sessionStorage.setItem('email',user.email);
+    sessionStorage.setItem('token',token);
+    sessionStorage.setItem('photo',user.photoURL);
     setLoggedInInfo(newUserInfo);
     console.log(user);
     history.push('/');

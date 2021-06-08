@@ -20,6 +20,8 @@ const Sidebar = ({toggleSidebar, handleToggleSidebar}) => {
 const handleLogOut = () => {
     firebase.auth().signOut().then(() => {
         // Sign-out successful.
+        sessionStorage.removeItem('token');
+        sessionStorage.removeItem('email');
         console.log('successful')
       }).catch((error) => {
         // An error happened.
@@ -56,7 +58,7 @@ const handleLogOut = () => {
             <hr/>
 
             <li >
-               {loggedInInfo.email? <Link onClick={handleLogOut} to='/login'>
+               {sessionStorage.getItem('email')? <Link onClick={handleLogOut} to='/login'>
                 <MdExitToApp size={23} />
                 <span>Log Out</span>
                 </Link>:

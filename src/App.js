@@ -48,11 +48,11 @@ console.log('logged in user info',loggedInInfo);
     <>
     <userContext.Provider value={[loggedInInfo,setLoggedInInfo]}>
       <Switch>
-        <Route exact path="/">
+        <PrivateRoute exact path="/">
           <Home>
             <HomeScreen />
           </Home>
-        </Route>
+        </PrivateRoute>
         <Route path="/login">
           <LoginScreen />
         </Route>
