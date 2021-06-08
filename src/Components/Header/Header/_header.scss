@@ -1,0 +1,94 @@
+@import '../../../_base.scss';
+.header{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 3rem;
+    background-color: $black-primary;
+    height:10vh;
+    width: 100%;
+    &-menu{
+        display:none;
+    }
+    &-logo{
+        width: 35px;
+        height: 35px;
+        object-fit: contain;
+        display:block;
+    }
+    &-logoBox{
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        padding: .2rem;
+    }
+    &-logoBox>h4{
+        margin-top:7px;
+        margin-left: 5px;
+        color: white;
+        // letter-spacing:px;
+    }
+    form{
+        flex: .6;
+        display:flex;
+        padding: 0.1rem;
+        margin: 0.1rem;
+        border-radius: 3px;
+        border: 1.2px solid;
+        background-color: $black-secondary;
+
+
+        input{
+            width: 100%;
+            border: none;
+            font-weight: 500;
+            background:transparent;
+            padding:0.3rem;
+            color: $text-color;
+
+            &:focus {
+                outline:none;
+            }
+        }
+        button {
+            padding: 0 1.25rem;
+            color: $text-color;
+            background:transparent;
+            border: none;
+            &:focus{
+                border: none;
+            }
+        }
+    }
+    &-icons{
+        flex:0.15;
+        display:flex;
+        justify-content:space-around;
+        align-items:center;
+        
+        img{
+            border-radius: 50%;
+            width: 45px;
+            object-fit:contain;
+            margin-left: 5px;
+        }
+    }
+}
+@media (max-width: $breakpoint-small) {
+    .header{
+        padding: 1rem;
+
+        form {
+            flex:1;
+        }
+        &-menu{
+            display:block;
+        }
+        &-logo{
+            display:none;
+        }
+        &-icons>*:not(img) {
+            display:none;
+        }
+    }
+}

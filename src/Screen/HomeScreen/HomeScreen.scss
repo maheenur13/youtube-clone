@@ -1,0 +1,10 @@
+.row{
+    width: 100%;
+    // border: 1px solid;
+    overflow-y: scroll;
+    height:80vh;
+    &::-webkit-scrollbar {
+        width: 0px;
+    }
+    scrollbar-width: none;
+}
