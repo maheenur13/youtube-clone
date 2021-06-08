@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './_sidebar.scss';
+import firebase from "firebase/app";
+import "../../firebase";
 import { 
     MdSubscriptions,
     MdExitToApp,
@@ -10,12 +12,19 @@ import {
     MdHome
 }
 from 'react-icons/md';
-
+import { Link } from "react-router-dom";
+import { userContext } from '../../App';
 
 const Sidebar = ({toggleSidebar, handleToggleSidebar}) => {
-
-
-
+    const [loggedInInfo,setLoggedInInfo]=useContext(userContext);
+const handleLogOut = () => {
+    firebase.auth().signOut().then(() => {
+        // Sign-out successful.
+        console.log('successful')
+      }).catch((error) => {
+        // An error happened.
+      });
+}
     console.log('from side bar ',toggleSidebar)
     return (
         <nav className={toggleSidebar? "sidebar open":"sidebar"} onClick={()=>handleToggleSidebar(false)}>
@@ -45,9 +54,17 @@ const Sidebar = ({toggleSidebar, handleToggleSidebar}) => {
                 <span>Library</span>
             </li>
             <hr/>
+
             <li >
+               {loggedInInfo.email? <Link onClick={handleLogOut} to='/login'>
                 <MdExitToApp size={23} />
                 <span>Log Out</span>
+                </Link>:
+                <Link to='/login'>
+                <MdExitToApp size={23} />
+                <span>Log In</span>
+                </Link>
+                }
             </li>
           <hr/>
         </nav>
