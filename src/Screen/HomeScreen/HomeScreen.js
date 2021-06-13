@@ -1,16 +1,21 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Categoriesbar from '../../Components/Categoriesbar/Categoriesbar';
 import Video from '../../Components/Video/Video';
 import './HomeScreen.scss';
-// import { useDispatch } from 'react-redux';
-// import { getPopularVideos } from '../../redux/actions/videos.action';
+
 const HomeScreen = () => {
    const array = [...new Array(20)];
-//    const dispatch = useDispatch();
-//    useEffect(()=>{
-//        dispatch(getPopularVideos())
-//    },[dispatch])
+   const [videos, setVideos]= useState([]);
+   const url = "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&regionCode=US&maxResults=40&key=AIzaSyALTUTy8yzda57TLdtPGoKFOgbDyjiuDTA";
+   useEffect(() =>{
+       fetch(url)
+       .then(res=>res.json())
+       .then(data=>{
+           setVideos(data.items);
+       })
+   },[])
+
     return (
         
         <Container>
@@ -18,10 +23,13 @@ const HomeScreen = () => {
             <Row className="row">
                 {
                     
-                    array.map(() =>
-                        <Col lg={3} md={4}>
-                            <Video />
-                        </Col>
+                    videos?.map((video) =>
+                        {
+                            
+                        return(<Col lg={3} md={4} key={video.id}>
+                            <Video video={video} />
+                        </Col>)
+                        }
                     )
                 }
             </Row>

@@ -1,24 +1,44 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './_video.scss';
+import moment from 'moment';
+import numeral from 'numeral';
 // import { AiFillEve } from 'react-icons/ai';
-const Video = () => {
+const Video = ({video}) => {
+    const [channelDetails, setChannelDetails] = useState([]);
+    // console.log(video);
+    const duration = video.contentDetails.duration;
+    const views = video.statistics.viewCount;
+    // console.log(duration);
+    const seconds = moment.duration(duration).asSeconds();
+    const _duration = moment.utc(seconds * 1000).format("mm:ss");
+    // console.log(_duration);
+    console.log(channelDetails);
+    const channelUrl = `https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=${video.snippet.channelId}&key=AIzaSyALTUTy8yzda57TLdtPGoKFOgbDyjiuDTA`
+   useEffect(() =>{
+    fetch(channelUrl)
+    .then(res=>res.json())
+    .then(data=>{
+        setChannelDetails(data?.items[0]);
+    })
+},[])
+
     return (
         <div className="video">
             <div className="video-top">
-                <img src="https://i.ytimg.com/vi/7jMlFXouPk8/hqdefault.jpg?sqp=-oaymwEcCOADEI4CSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBn_YU0FHCphaPCLSclDxJqFDy6pQ" alt="" />
-                <span>06:12</span>
+                <img src={video?.snippet?.thumbnails?.high.url}  alt="" />
+                <span>{_duration}</span>
             </div>
             <div className="video-title">
-                Pink Floyd - High Hopes (Official Music Video HD)
+                {video.snippet.title}
             </div>
             <div className="video-channel">
-                <img src="https://yt3.ggpht.com/ytc/AAUvwngQNAVjLe99z3AoBiSRK766IsNfCV_Q4D-ALsL3Aw=s88-c-k-c0x00ffffff-no-rj" alt="" />
+                <img src={channelDetails?.snippet?.thumbnails?.high.url} alt="" />
                 <div>
-                    <p>Pink Floyd</p>
+                    <p>{video.snippet.channelTitle}</p>
                     <span>
-                        85M views •
+                        {numeral(views).format("0.a")} • {" "}
                     </span>
-                    <span> 6 years ago</span>
+                    <span>{ moment(video.snippet.publishedAt).fromNow() }</span>
                 </div>
             </div>
 
