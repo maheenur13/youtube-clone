@@ -32,11 +32,11 @@ const Categoriesbar = () => {
     const [categoryVideos, setCategoryVideos] = useState([]);
     const [activeElement, setActiveElement] = useState('All');
     useEffect(()=>{
-        const url = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${activeElement}&regionCode=US&key=AIzaSyALTUTy8yzda57TLdtPGoKFOgbDyjiuDTA`
+        const url = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=40&q=${activeElement}&key=AIzaSyALTUTy8yzda57TLdtPGoKFOgbDyjiuDTA`
         fetch(url)
         .then(res=>res.json())
-        .then(data =>console.log(data))
-    },[activeElement])
+        .then(data =>setVideos(data.items))
+    },[activeElement, setVideos])
     const handleClick = category => {
         setActiveElement(category);
     }

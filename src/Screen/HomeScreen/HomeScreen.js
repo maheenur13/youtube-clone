@@ -8,14 +8,8 @@ import { userContext } from '../../App';
 const HomeScreen = () => {
     const {value2} = useContext(userContext);
    const [videos, setVideos]= value2;
-   const url = "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&regionCode=US&maxResults=40&key=AIzaSyALTUTy8yzda57TLdtPGoKFOgbDyjiuDTA";
-   useEffect(() =>{
-       fetch(url)
-       .then(res=>res.json())
-       .then(data=>{
-           setVideos(data.items);
-       })
-   },[setVideos])
+//    console.log('videos',videos);
+
 
     return (
         
