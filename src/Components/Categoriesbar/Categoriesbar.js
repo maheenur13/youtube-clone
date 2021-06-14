@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './_categoriesbar.scss';
+import { userContext } from '../../App';
 
 const categoryCollection = [
     'All',
@@ -26,10 +27,26 @@ const categoryCollection = [
     
 ]
 const Categoriesbar = () => {
-    const [activeElement, setActiveElement] = useState('All')
+    const {value2} = useContext(userContext);
+   const [videos, setVideos]= value2;
+    const [categoryVideos, setCategoryVideos] = useState([]);
+    const [activeElement, setActiveElement] = useState('All');
+    useEffect(()=>{
+        const url = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${activeElement}&regionCode=US&key=AIzaSyALTUTy8yzda57TLdtPGoKFOgbDyjiuDTA`
+        fetch(url)
+        .then(res=>res.json())
+        .then(data =>console.log(data))
+    },[activeElement])
     const handleClick = category => {
         setActiveElement(category);
     }
+    console.log(activeElement)
+    // curl \
+//   'https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=surfing&regionCode=US&key=[YOUR_API_KEY]' \
+//   --header 'Authorization: Bearer [YOUR_ACCESS_TOKEN]' \
+//   --header 'Accept: application/json' \
+//   --compressed
+
     return (
         <div className="categoriesBar">
             {

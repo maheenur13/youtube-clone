@@ -12,7 +12,7 @@ const Video = ({video}) => {
     const seconds = moment.duration(duration).asSeconds();
     const _duration = moment.utc(seconds * 1000).format("mm:ss");
     // console.log(_duration);
-    console.log(channelDetails);
+    // console.log(channelDetails);
     const channelUrl = `https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=${video.snippet.channelId}&key=AIzaSyALTUTy8yzda57TLdtPGoKFOgbDyjiuDTA`
    useEffect(() =>{
     fetch(channelUrl)
@@ -20,7 +20,7 @@ const Video = ({video}) => {
     .then(data=>{
         setChannelDetails(data?.items[0]);
     })
-},[])
+},[channelUrl])
 
     return (
         <div className="video">

@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Categoriesbar from '../../Components/Categoriesbar/Categoriesbar';
 import Video from '../../Components/Video/Video';
 import './HomeScreen.scss';
+import { userContext } from '../../App';
 
 const HomeScreen = () => {
-   const array = [...new Array(20)];
-   const [videos, setVideos]= useState([]);
+    const {value2} = useContext(userContext);
+   const [videos, setVideos]= value2;
    const url = "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&regionCode=US&maxResults=40&key=AIzaSyALTUTy8yzda57TLdtPGoKFOgbDyjiuDTA";
    useEffect(() =>{
        fetch(url)

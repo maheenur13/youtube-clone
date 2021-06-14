@@ -41,12 +41,13 @@ const Home = ({ children }) => {
 
 export const userContext=createContext();
 const App = () => {
+  const [videos, setVideos]= useState([]);
 const [loggedInInfo, setLoggedInInfo] = useState([]);
 console.log('logged in user info',loggedInInfo);
   const history = useHistory();
   return (
     <>
-    <userContext.Provider value={[loggedInInfo,setLoggedInInfo]}>
+    <userContext.Provider value={{value1:[loggedInInfo,setLoggedInInfo], value2:[videos, setVideos]}}>
       <Switch>
         <PrivateRoute exact path="/">
           <Home>

@@ -16,7 +16,7 @@ import { Link } from "react-router-dom";
 import { userContext } from '../../App';
 
 const Sidebar = ({toggleSidebar, handleToggleSidebar}) => {
-    const [loggedInInfo,setLoggedInInfo]=useContext(userContext);
+    // const [loggedInInfo,setLoggedInInfo]=useContext(userContext);
 const handleLogOut = () => {
     firebase.auth().signOut().then(() => {
         // Sign-out successful.

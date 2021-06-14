@@ -6,7 +6,8 @@ import './_loginscreen.scss';
 import { useHistory} from 'react-router-dom';
 import { userContext } from '../../App';
 const LoginScreen = () => {
-    const [loggedInInfo,setLoggedInInfo]=useContext(userContext);
+  const {value1} = useContext(userContext);
+    const [loggedInInfo,setLoggedInInfo]=value1;;
    const history = useHistory();
     const handleLogin = () => {
         const provider = new firebase.auth.GoogleAuthProvider();
