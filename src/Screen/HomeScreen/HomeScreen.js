@@ -15,13 +15,13 @@ const HomeScreen = () => {
        .then(data=>{
            setVideos(data.items);
        })
-   },[])
+   },[setVideos])
 
     return (
         
         <Container>
             <Categoriesbar/>
-            <Row className="row">
+            {videos?<Row className="row">
                 {
                     
                     videos?.map((video) =>
@@ -33,7 +33,9 @@ const HomeScreen = () => {
                         }
                     )
                 }
-            </Row>
+            </Row>:
+            <h3 className="text-center mt-5 text-danger">Api Limit Exceeded! Please Come And Visit Tomorrow!</h3>
+            }
         </Container>
         
     );
